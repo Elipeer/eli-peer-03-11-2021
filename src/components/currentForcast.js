@@ -5,11 +5,11 @@ import ForcastCards from "./fiveDayForcastCards";
 import { setLocations } from "../store/reducers/appSettings";
 import { connect } from "react-redux";
 import { Button } from "@mui/material";
+import weatherService from "../services/weatherService";
 
 const CurrentForcast = (props) => {
   const [imperialTemp, setImperialTemp] = useState("");
   const [metricTemp, setMetricTemp] = useState("");
-  const [imperialMode, setImperialMode] = useState(false);
 
   useEffect(() => {
     if (props.currentCityDetails?.Temperature.Imperial.Value) {
@@ -21,7 +21,8 @@ const CurrentForcast = (props) => {
   return (
     <>
       <div className="weather-cont">
-        <div className="padding20 flex flex-between ai-c">
+        <div className="opacity-cont" />
+        <div className="top-cont-current-weather">
           <div className="flex ac-c ai-c">
             <img
               src={`https://developer.accuweather.com/sites/default/files/${
@@ -32,31 +33,22 @@ const CurrentForcast = (props) => {
               alt="cloudy"
               style={{ width: "120px", height: "80px", borderRadius: "15px" }}
             />
-            <div className="ml-10 white-color">
+            <div className="ml-10">
               <div className="bold fs-26">{props.currentCityName}</div>
               <div className="bold">{props.currentCityDetails?.WeatherText}</div>
-              <h2>{imperialMode ? imperialTemp : metricTemp || ""}</h2>
-              <div className="center mb-20">
-                <span style={{ color: imperialMode ? "white" : "lightgray" }} onClick={() => setImperialMode(true)}>
-                  Imperial
-                </span>
-                /
-                <span style={{ color: !imperialMode ? "white" : "lightgray" }} onClick={() => setImperialMode(false)}>
-                  Metric
-                </span>
-              </div>
+              <h2>{props.mode === "imperial" ? imperialTemp : metricTemp || ""}</h2>
             </div>
           </div>
           <div className="as-c pointer">
             {props.locations.some((x) => x.id === props.cityId) ? (
-              <div className="white-color flex">
+              <div className="flex">
                 <FavoriteIcon fontSize="large" />
                 <Button color="inherit" onClick={toggleFavoriteCity}>
                   Remove from favorites
                 </Button>
               </div>
             ) : (
-              <div className="white-color flex">
+              <div className="flex">
                 <FavoriteBorderIcon fontSize="large" />
                 <Button color="inherit" onClick={toggleFavoriteCity}>
                   Add to favorites
@@ -83,7 +75,8 @@ const CurrentForcast = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    locations: state.persistedReducer.locations
+    locations: state.persistedReducer.locations,
+    mode: state.persistedReducer.mode
   };
 };
 const mapDispatchToProps = { setLocations };

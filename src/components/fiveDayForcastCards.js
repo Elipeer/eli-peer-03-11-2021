@@ -20,10 +20,10 @@ const FiveDayForcastCards = ({ cardDetails }) => {
                   {item.Day.IconPhrase}
                 </div>
                 <div>
-                  Low: {item.Temperature.Minimum.Value} {item.Temperature.Minimum.Unit}
+                  High: {item.Temperature.Maximum.Value + "°"} {item.Temperature.Maximum.Unit}
                 </div>
                 <div>
-                  Low: {item.Temperature.Maximum.Value} {item.Temperature.Maximum.Unit}
+                  Low: {item.Temperature.Minimum.Value + "°"} {item.Temperature.Minimum.Unit}
                 </div>
               </div>
             </Fragment>

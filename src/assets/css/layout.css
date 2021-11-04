@@ -3,29 +3,49 @@
   margin: 0 auto;
   min-height: 500px;
   margin-top: 50px;
-  background-color: #9782a9;
-  border: 1px solid #d6d6d6 !important;
+  position: relative;
   border-radius: 13px;
   padding: 2px;
   box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
   vertical-align: top;
-  color: #e8e8e8;
+  color: #9782a9;
+}
+.nav-con {
+  width: 100%;
+  padding: 20px;
+  background: white;
+  opacity: 0.59;
+}
+.generic-logo {
+  display: inline-block;
+  width: 220px;
+}
+
+.generic-logo img {
+  width: 100%;
+}
+
+.nav-links {
+  float: right;
+  padding-right: 50px;
 }
 
 .favorites-cards-cont {
   width: 75%;
-  margin: 0 auto;
-  min-height: 500px;
   display: flex;
   justify-content: center;
-  align-items: center;
   align-content: center;
-  background-color: #9782a9;
-  border: 1px solid #d6d6d6 !important;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  min-height: 500px;
+  position: relative;
+  margin-top: 50px;
   border-radius: 13px;
   padding: 2px;
   box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
-  color: #e8e8e8;
+  vertical-align: top;
+  color: #9782a9;
 }
 
 .favorites-card {
@@ -35,10 +55,10 @@
   justify-content: center;
   align-items: center;
   height: 250px;
-  background-color: #ddd5e5;
+  position: relative;
   border: 1px solid #d6d6d6 !important;
   border-radius: 13px;
-  color: #000000;
+  color: black;
   padding: 15px;
   margin: 20px;
 }
@@ -50,15 +70,43 @@
   align-items: center;
   min-width: 150px;
   height: 250px;
-  background-color: #ddd5e5;
+  /* background-color: #ddd5e5; */
   border: 1px solid #d6d6d6 !important;
   border-radius: 13px;
-  color: #000000;
+  color: black;
   padding: 15px;
   margin-bottom: 20px;
 }
 
 body {
-  background-image: linear-gradient(white, #ddd5e5);
-  height: 100vh;
+  background-image: linear-gradient(white, #9782a9);
+  height: 100vh !important;
+  background-size: cover;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.top-cont-current-weather {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.opacity-cont {
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+  background: aliceblue;
+  position: absolute;
+  z-index: -1;
+  border-radius: 15px;
+}
+
+@media only screen and (max-width: 700px) {
+  .nav-links {
+    float: none;
+    margin-top: 15px;
+  }
 }

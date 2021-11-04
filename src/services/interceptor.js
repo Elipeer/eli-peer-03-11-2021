@@ -7,7 +7,6 @@ export default {
   setupInterceptors: (history, toggleLoader) => {
     axios.interceptors.request.use((config) => {
       if (!config.preventLoading) toggleLoader(true);
-      // config.headers = { "Content-Type": "application/json" };
 
       return config;
     });
@@ -22,7 +21,7 @@ export default {
             document.location.href = "/sessions/login";
             return;
           } else if (response.data.err) {
-            Swal.fire("", generalErrMsg, "warning");
+            Swal.fire({ title: "", text: generalErrMsg, icon: "warning", heightAuto: false });
           }
         }
 
@@ -36,7 +35,7 @@ export default {
             window.location.href = "/";
           });
         } else {
-          Swal.fire("", generalErrMsg, "warning");
+          Swal.fire({ title: "", text: generalErrMsg, icon: "warning", heightAuto: false });
         }
         return error;
       }
