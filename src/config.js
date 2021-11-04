@@ -1,5 +1,5 @@
 const apiUrl = "http://dataservice.accuweather.com";
-const apikey = "?apikey=8R5LHteCio2AzwzcPtwco7IzUwMKxtXj";
+const apikey = "?apikey=BU9xLNnPFgjerm9PvrVtvnPhASfT0WIC";
 export default {
   // protected
   autoCompleteEndpoint: `${apiUrl}/locations/v1/cities/autocomplete${apikey}&q=`,
