@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import ForcastCards from "./fiveDayForcastCards";
 import { setLocations } from "../store/reducers/appSettings";
 import { connect } from "react-redux";
-import { Button, Switch } from "@mui/material";
+import { Button } from "@mui/material";
 
 const CurrentForcast = (props) => {
   const [imperialTemp, setImperialTemp] = useState("");
