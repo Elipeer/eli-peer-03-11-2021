@@ -1,3 +1,4 @@
+import "./assets/css/layout.css";
 import { ThemeProvider } from "@mui/material";
 import theme from "./theme/theme";
 import { Provider } from "react-redux";
@@ -6,7 +7,6 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
-import "./assets/css/layout.css";
 import WeatherSearchCont from "./components/weatherSearchCont";
 import NavBar from "./layout/navBar";
 import FavoritesCont from "./components/favoritesCont";
@@ -24,7 +24,6 @@ function App() {
             <NavBar />
             <Switch>
               <Route path="/favorites" component={FavoritesCont} />
-              <Route path="/:id/:name" component={WeatherSearchCont} />
               <Route path="/" component={WeatherSearchCont} />
             </Switch>
           </BrowserRouter>

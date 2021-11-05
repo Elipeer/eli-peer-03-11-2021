@@ -3,28 +3,18 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import weatherService from "../services/weatherService";
 import CurrentForcast from "./currentForcast";
+import { setCurrentCity } from "../store/reducers/currentCity";
 
 const WeatherSearchCont = (props) => {
   const [citiesList, setCitiesList] = useState([]);
   const [fiveDayDetails, setFiveDayDetails] = useState(null);
   const [searchCityName, setSearchCityName] = useState("");
-  const [searchCityId, setSearchCityId] = useState("");
   const [currentCityDetails, setCurrentCityDetails] = useState(null);
 
   useEffect(() => {
     async function getWeatherFromApi() {
-      //Tel aviv id
-      let cityId = "215854";
-      if (props.match.params.id) {
-        cityId = props.match.params.id;
-        //todo
-        // setSearchCityName(props.match.params.name);
-      }
-
-      const curCity = await weatherService.getCurrentLocationWeather(cityId);
-      const fiveDay = await weatherService.getFiveDayForcast(cityId, props.mode);
-      debugger;
-      setSearchCityId(cityId);
+      const curCity = await weatherService.getCurrentLocationWeather(props.currentCity.id);
+      const fiveDay = await weatherService.getFiveDayForcast(props.currentCity.id, props.mode);
       setFiveDayDetails(fiveDay.DailyForecasts);
       setCurrentCityDetails(curCity[0]);
     }
@@ -33,17 +23,15 @@ const WeatherSearchCont = (props) => {
 
   useEffect(() => {
     async function getWeatherFromApi() {
-      let fiveDay = await weatherService.getFiveDayForcast(searchCityId, props.mode);
+      let fiveDay = await weatherService.getFiveDayForcast(props.currentCity.id, props.mode);
       setFiveDayDetails(fiveDay.DailyForecasts);
     }
-    if (searchCityId) getWeatherFromApi();
+    if (props.currentCity) getWeatherFromApi();
   }, [props.mode]);
 
   useEffect(() => {
-    debugger;
     async function getUpdatedBackground() {
       const photos = await weatherService.getPhotos(currentCityDetails?.WeatherText);
-      debugger;
       document.body.style.backgroundImage = `url(${photos.results[0].urls.regular})`;
       document.body.style.backgroundSize = `cover`;
       document.body.style.backgroundRepeat = `no-repeat`;
@@ -87,17 +75,13 @@ const WeatherSearchCont = (props) => {
           />
         </div>
       </div>
-      <CurrentForcast
-        currentCityName={searchCityName || "Tel Aviv"}
-        currentCityDetails={currentCityDetails}
-        fiveDayDetails={fiveDayDetails}
-        cityId={searchCityId}
-      />
+      <CurrentForcast currentCityDetails={currentCityDetails} fiveDayDetails={fiveDayDetails} />
     </>
   );
 
   async function onChangeOfCurrentCity(e) {
     if (e.target.innerHTML) {
+      setSearchCityName(e.target.innerHTML);
       let list = [...citiesList];
       let id = list.filter((x) => x.name === e.target.innerHTML);
       let curCity = await weatherService.getCurrentLocationWeather(id[0].key);
@@ -105,8 +89,8 @@ const WeatherSearchCont = (props) => {
 
       setCurrentCityDetails(curCity[0]);
       setFiveDayDetails(fiveDay.DailyForecasts);
-      setSearchCityName(id[0].name);
-      setSearchCityId(id[0].key);
+      props.setCurrentCity({ name: id[0].name, id: id[0].key });
+      setSearchCityName("");
     }
   }
 
@@ -125,8 +109,11 @@ const WeatherSearchCont = (props) => {
 const mapStateToProps = (state) => {
   return {
     locations: state.persistedReducer.locations,
+    currentCity: state.currentCity.currentCity,
     mode: state.persistedReducer.mode
   };
 };
 
-export default connect(mapStateToProps)(WeatherSearchCont);
+const mapDispatchToProps = { setCurrentCity };
+
+export default connect(mapStateToProps, mapDispatchToProps)(WeatherSearchCont);
