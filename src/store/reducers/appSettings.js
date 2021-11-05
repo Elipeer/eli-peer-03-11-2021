@@ -5,8 +5,7 @@ export const appSettings = createSlice({
   initialState: {
     loaderOn: false,
     locations: [],
-    mode: "metric",
-    backgroundImage: ""
+    mode: "metric"
   },
   reducers: {
     setLoaderOn: (state) => {
@@ -25,6 +24,6 @@ export const appSettings = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setLoaderOn, setLoaderOff, setLocations, setMode, setBackgroundImage } = appSettings.actions;
+export const { setLoaderOn, setLoaderOff, setLocations, setMode } = appSettings.actions;
 
 export default appSettings.reducer;

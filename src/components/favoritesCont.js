@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import weatherService from "../services/weatherService";
 import ClearIcon from "@mui/icons-material/Clear";
 import { setLocations } from "../store/reducers/appSettings";
+import { setCurrentCity } from "../store/reducers/currentCity";
 import Swal from "sweetalert2";
 
 const FavoritesCont = (props) => {
@@ -15,7 +16,6 @@ const FavoritesCont = (props) => {
       if (props.locations) {
         let arr = [...favoriteLocations];
         for (const item of props.locations) {
-          debugger;
           let curCity = await weatherService.getCurrentLocationWeather(item.id);
           arr.push({ ...curCity[0], city: item.city, id: item.id });
         }
@@ -75,8 +75,9 @@ const FavoritesCont = (props) => {
       ) : null}
     </>
   );
-  function redirectToMain(id, city) {
-    history.push(`/${id}/${city}`);
+  function redirectToMain(id, name) {
+    props.setCurrentCity({ name, id });
+    history.push("/");
   }
 
   function removeFromSaved(id, e) {
@@ -95,7 +96,6 @@ const FavoritesCont = (props) => {
         savedLocations = props.locations.filter((x) => !x.id.includes(id));
         props.setLocations(savedLocations);
         setFavoriteLocations(currentLocationsDetails);
-        debugger;
       }
     });
   }
@@ -107,6 +107,6 @@ const mapStateToProps = (state) => {
     mode: state.persistedReducer.mode
   };
 };
-const mapDispatchToProps = { setLocations };
+const mapDispatchToProps = { setLocations, setCurrentCity };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FavoritesCont);

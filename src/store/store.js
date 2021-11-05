@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import appSettingsReducer from "./reducers/appSettings";
+import currentCity from "./reducers/currentCity";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 
@@ -12,7 +13,8 @@ const persistedReducer = persistReducer(persistConfig, appSettingsReducer);
 
 export default configureStore({
   reducer: {
-    persistedReducer
+    persistedReducer,
+    currentCity
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

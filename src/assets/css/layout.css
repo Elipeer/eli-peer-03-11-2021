@@ -80,6 +80,7 @@
 
 body {
   background-image: linear-gradient(white, #9782a9);
+  background: no-repeat center center fixed;
   height: 100vh !important;
   background-size: cover;
   width: 100%;
@@ -106,8 +107,17 @@ body {
 
 @media only screen and (max-width: 700px) {
   .nav-links {
-    float: none;
-    margin-top: 15px;
+    text-align: center;
+  }
+
+  .nav-links > div {
+    margin: 10px;
+  }
+
+  .nav-con {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .top-cont-current-weather {

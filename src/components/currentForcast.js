@@ -34,13 +34,13 @@ const CurrentForcast = (props) => {
               style={{ width: "120px", height: "80px", borderRadius: "15px" }}
             />
             <div className="ml-10">
-              <div className="bold fs-26">{props.currentCityName}</div>
+              <div className="bold fs-26">{props.currentCity.name}</div>
               <div className="bold">{props.currentCityDetails?.WeatherText}</div>
               <h2>{props.mode === "imperial" ? imperialTemp : metricTemp || ""}</h2>
             </div>
           </div>
           <div className="as-c pointer">
-            {props.locations.some((x) => x.id === props.cityId) ? (
+            {props.locations.some((x) => x.id === props.currentCity.id) ? (
               <div className="flex">
                 <FavoriteIcon fontSize="large" />
                 <Button color="inherit" onClick={toggleFavoriteCity}>
@@ -63,11 +63,11 @@ const CurrentForcast = (props) => {
   );
   function toggleFavoriteCity() {
     let arr = [...props.locations];
-    if (props.locations.some((x) => x.id === props.cityId)) {
-      arr = props.locations.filter((x) => !x.id.includes(props.cityId));
+    if (props.locations.some((x) => x.id === props.currentCity.id)) {
+      arr = props.locations.filter((x) => !x.id.includes(props.currentCity.id));
       props.setLocations(arr);
     } else {
-      arr.push({ id: props.cityId, city: props.currentCityName });
+      arr.push({ id: props.currentCity.id, city: props.currentCity.name });
       props.setLocations(arr);
     }
   }
@@ -76,6 +76,7 @@ const CurrentForcast = (props) => {
 const mapStateToProps = (state) => {
   return {
     locations: state.persistedReducer.locations,
+    currentCity: state.currentCity.currentCity,
     mode: state.persistedReducer.mode
   };
 };
