@@ -42,20 +42,7 @@ const WeatherSearchCont = (props) => {
   return (
     <>
       <div className="container center">
-        <div
-          style={{
-            background: "aliceblue",
-            borderRadius: "25px",
-            display: "flex",
-            alignContent: "start",
-            alignItems: "center",
-            padding: "12px",
-            color: "white",
-            marginTop: "20px",
-            maxWidth: "500px"
-          }}
-          className="auto0"
-        >
+        <div className="auto0 large-label">
           <Autocomplete
             options={citiesList[0] ? citiesList.map((item) => item.name) : []}
             value={searchCityName}
