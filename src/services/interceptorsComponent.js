@@ -11,6 +11,7 @@ class InterceptorsComponent extends Component {
   }
 
   render() {
+    debugger;
     return <div>{this.props.loaderOn ? <ContentLoader /> : null}</div>;
   }
 
