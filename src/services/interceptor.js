@@ -16,11 +16,7 @@ export default {
         toggleLoader(false);
 
         if (response && response.data) {
-          if (response.data.needsLogin) {
-            localStorage.clear();
-            document.location.href = "/sessions/login";
-            return;
-          } else if (response.data.err) {
+          if (response.data.err) {
             Swal.fire({ title: "", text: generalErrMsg, icon: "warning", heightAuto: false });
           }
         }

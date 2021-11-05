@@ -27,20 +27,10 @@ const FavoritesCont = (props) => {
 
   return (
     <>
-      <div className="auto0  center"> {!favoriteLocations[0] ? <h1>No Favorites Yet</h1> : <h1>Favorites</h1>}</div>
+      <div className="auto0 large-label">{!favoriteLocations[0] ? <div>No Favorites Yet</div> : <div>Favorites</div>}</div>
       {favoriteLocations[0] ? (
         <div className="favorites-cards-cont">
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              opacity: "0.9",
-              background: "aliceblue",
-              position: "absolute",
-              zIndex: "-1",
-              borderRadius: "15px"
-            }}
-          />
+          <div className="opacity-cont" />
           {favoriteLocations.map((item, i) => {
             return (
               <Fragment key={i + "sfdf"}>

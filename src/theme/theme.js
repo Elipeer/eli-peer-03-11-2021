@@ -4,7 +4,7 @@ import * as customColors from "./customColors";
 const theme = createTheme({
   palette: {
     primary: {
-      main: customColors.white
+      main: customColors.black
     },
     text: {
       primary: customColors.black

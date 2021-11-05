@@ -39,20 +39,16 @@ const CurrentForcast = (props) => {
               <h2>{props.mode === "imperial" ? imperialTemp : metricTemp || ""}</h2>
             </div>
           </div>
-          <div className="as-c pointer">
+          <div className="as-c pointer" onClick={toggleFavoriteCity}>
             {props.locations.some((x) => x.id === props.currentCity.id) ? (
               <div className="flex">
                 <FavoriteIcon fontSize="large" />
-                <Button color="inherit" onClick={toggleFavoriteCity}>
-                  Remove from favorites
-                </Button>
+                <Button color="inherit">Remove from favorites</Button>
               </div>
             ) : (
               <div className="flex">
                 <FavoriteBorderIcon fontSize="large" />
-                <Button color="inherit" onClick={toggleFavoriteCity}>
-                  Add to favorites
-                </Button>
+                <Button color="inherit">Add to favorites</Button>
               </div>
             )}
           </div>
