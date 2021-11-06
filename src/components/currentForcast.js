@@ -5,7 +5,6 @@ import ForcastCards from "./fiveDayForcastCards";
 import { setLocations } from "../store/reducers/appSettings";
 import { connect } from "react-redux";
 import { Button } from "@mui/material";
-import weatherService from "../services/weatherService";
 
 const CurrentForcast = (props) => {
   const [imperialTemp, setImperialTemp] = useState("");
@@ -24,15 +23,18 @@ const CurrentForcast = (props) => {
         <div className="opacity-cont" />
         <div className="top-cont-current-weather">
           <div className="flex ac-c ai-c">
-            <img
-              src={`https://developer.accuweather.com/sites/default/files/${
-                props.currentCityDetails?.WeatherIcon < 10
-                  ? "0" + props.currentCityDetails?.WeatherIcon
-                  : props.currentCityDetails?.WeatherIcon
-              }-s.png`}
-              alt="cloudy"
-              style={{ width: "120px", height: "80px", borderRadius: "15px" }}
-            />
+            {props.currentCityDetails ? (
+              <img
+                src={`https://developer.accuweather.com/sites/default/files/${
+                  props.currentCityDetails?.WeatherIcon < 10
+                    ? "0" + props.currentCityDetails?.WeatherIcon
+                    : props.currentCityDetails?.WeatherIcon
+                }-s.png`}
+                alt="cloudy"
+                style={{ width: "120px", height: "80px", borderRadius: "15px" }}
+              />
+            ) : null}
+
             <div className="ml-10">
               <div className="bold fs-26">{props.currentCity.name}</div>
               <div className="bold">{props.currentCityDetails?.WeatherText}</div>
