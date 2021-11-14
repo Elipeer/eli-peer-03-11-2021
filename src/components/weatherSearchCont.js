@@ -25,7 +25,6 @@ const WeatherSearchCont = (props) => {
     async function getWeatherFromApi() {
       let fiveDay = await weatherService.getFiveDayForcast(props.currentCity.id, props.mode);
       setFiveDayDetails(fiveDay.DailyForecasts);
-      console.log("usedddddd");
     }
     if (currentCityDetails) getWeatherFromApi();
   }, [props.mode]);
